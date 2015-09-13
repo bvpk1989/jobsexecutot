@@ -58,13 +58,13 @@ public class JobsExecutorDaoImpl  extends AbstractDaoImpl implements JobsExecuto
 		
 	}
 
-	public void jobsDateTimeCompleted(int jobId) {
+	public void jobsDateTimeCompleted(int jobId ,Timestamp date_Time_Completed ) {
 		// TODO Auto-generated method stub
 		JobsExecutorEntity jobsExeEnt=(JobsExecutorEntity)HibernateUtil.getSession().get(JobsExecutorEntity.class, jobId);
 		
-	    Timestamp date_Time_Completed;
-	    Calendar cal=Calendar.getInstance();
-		date_Time_Completed=new Timestamp(cal.getTimeInMillis());
+	   // Timestamp date_Time_Completed;
+	  //  Calendar cal=Calendar.getInstance();
+	//	date_Time_Completed=new Timestamp(cal.getTimeInMillis());
 		jobsExeEnt.setDate_Time_Completed(date_Time_Completed);
 		
 	}

@@ -1,5 +1,7 @@
 package com.infy.jobsExecutor.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,13 +16,13 @@ import com.infy.jobsExecutor.service.JobsExecutorService;
 public class JobsExecutorServiceImpl implements JobsExecutorService {
 	@Autowired
 	private JobsExecutorDao jobsExeDao;
-	
-	//private CollectionService CollectionService; 
+
+	// private CollectionService CollectionService;
 
 	public void implFunction3_4_5() {
 		List jobs = jobsExeDao.getListOfJobs();
 		List<JobsExecutorEntity> fun2Jobs = jobsExeDao.fun2Impl();
-		System.out.print(jobs);
+		//System.out.print(jobs);
 		int jobsListCount = jobs.size();
 		if (jobsListCount < THRESH_HOLD) {
 			Iterator<JobsExecutorEntity> fun2JobsIterator = fun2Jobs.iterator();
@@ -28,10 +30,18 @@ public class JobsExecutorServiceImpl implements JobsExecutorService {
 				JobsExecutorEntity jobsExeEnt = fun2JobsIterator.next();
 				int jobId = jobsExeEnt.getJobs_id();
 				int collectionId = jobsExeEnt.getCollection_id();
-				Runnable r= new CollectionServiceImpl(jobId,collectionId);
+				Runnable r = new CollectionServiceImpl(jobId, collectionId);
 				new Thread(r).start();
-				System.out.print(jobId);
-				//System.out.println(collectionId);
+				jobsExeDao.upadateInProgress(jobId);
+				Timestamp timestamp;
+				synchronized(this){
+					Calendar cal=Calendar.getInstance();
+					timestamp=new Timestamp(cal.getTimeInMillis());
+					
+				}
+				jobsExeDao.jobsDateTimeCompleted(jobId,timestamp);
+				//System.out.print(jobId);
+				// System.out.println(collectionId);
 			}
 			System.out.println("this procedure executing");
 
