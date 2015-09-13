@@ -6,7 +6,9 @@
 */
 package com.infy.jobsExecutor.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,8 +25,8 @@ public class JobsExecutorEntity {
 	private int priority;
 	private String status;
 	private Date date_Time_Queued;
-	private Date date_Time_Started;
-	private Date date_Time_Completed;
+	private Timestamp date_Time_Started;
+	private java.sql.Timestamp date_Time_Completed;
 	
 	public int getJobs_id() {
 		return jobs_id;
@@ -68,16 +70,16 @@ public class JobsExecutorEntity {
 	public void setDate_Time_Queued(Date date_Time_Queued) {
 		this.date_Time_Queued = date_Time_Queued;
 	}
-	public Date getDate_Time_Started() {
+	public Timestamp getDate_Time_Started() {
 		return date_Time_Started;
 	}
-	public void setDate_Time_Started(Date date_Time_Started) {
+	public void setDate_Time_Started(Timestamp date_Time_Started) {
 		this.date_Time_Started = date_Time_Started;
 	}
-	public Date getDate_Time_Completed() {
+	public java.sql.Timestamp getDate_Time_Completed() {
 		return date_Time_Completed;
 	}
-	public void setDate_Time_Completed(Date date_Time_Completed) {
-		this.date_Time_Completed = date_Time_Completed;
+	public void setDate_Time_Completed(java.sql.Timestamp date_Time_Completed2) {
+		this.date_Time_Completed = date_Time_Completed2;
 	}
 }
